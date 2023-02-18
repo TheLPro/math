@@ -28,11 +28,14 @@ public class Party {
     public void children(int children) {
         this.children = children;
     }
-
+    public int getPeople() {
+        return adults + children;
+    }
     public int getPlates() {
         int plates = adults + children;
-        plates = plates * 2 + 5;
-        return plates;
+        int extra = plates / 10;
+        plates = plates * 2;
+        return plates + extra;
     }
     public int getTables() {
         int a = adults + children;
@@ -50,12 +53,25 @@ public class Party {
         int c = a+b;
         return (int) Math.ceil((double) c / 8);
     }
+    public int getEggs() {
+        int p = adults + children;
+        int e = (int) Math.ceil((double) p / 3);
+        int extra = (int) Math.ceil((double) p / 10);
+        return p + extra;
+    }
+    public int getSpoons() {
+        int p = adults + children;
+        return (int) Math.ceil((double) p / 3);
+    }
     public Map<PartyItem, Integer> getAllItems() {
         Map<PartyItem, Integer> items = new HashMap<PartyItem, Integer>(4);
+        items.put(PartyItem.PEOPLE, getPeople());
         items.put(PartyItem.PLATES, getPlates());
         items.put(PartyItem.TABLES, getTables());
         items.put(PartyItem.CHAIRS, getChairs());
         items.put(PartyItem.PIZZAS, getPizzas());
+        items.put(PartyItem.EGGS, getEggs());
+        items.put(PartyItem.SPOONS, getSpoons());
         return items;
     }
 }
